@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Casewell — Turn client interviews into case studies in 10 minutes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #17233B;
+    --ink-soft: #4B5568;
+    --paper: #F2F0E8;
+    --paper-raised: #FBFAF6;
+    --line: #D9D5C7;
+    --gold: #A9781F;
+    --gold-soft: #E8DCC0;
+    --sage: #4E6E5D;
+    --sage-soft: #DCE6DF;
+    --coral-flag: #B5533C;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .display {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  a { color: inherit; }
+
+  /* Header */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(242,240,232,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 0;
+  }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .logo .mark {
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--ink);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    transform: rotate(-4deg);
+  }
+  .navlinks { display: flex; gap: 32px; font-size: 14px; color: var(--ink-soft); }
+  .navlinks a:hover { color: var(--ink); }
+  .navcta {
+    background: var(--ink); color: var(--paper-raised);
+    padding: 9px 18px; border-radius: 3px;
+    font-size: 14px; font-weight: 500;
+    text-decoration: none;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 88px 0 70px;
+  }
+  .eyebrow {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before {
+    content: ''; width: 26px; height: 1px; background: var(--gold);
+  }
+  .hero h1 {
+    font-size: clamp(38px, 5.2vw, 62px);
+    max-width: 780px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); font-weight: 400; }
+  .hero p.lede {
+    font-size: 18px; color: var(--ink-soft);
+    max-width: 560px;
+    margin-top: 22px;
+    line-height: 1.55;
+  }
+  .hero-cta-row { display: flex; gap: 14px; margin-top: 34px; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    background: var(--ink); color: var(--paper-raised);
+    padding: 13px 24px; border-radius: 3px;
+    font-size: 15px; font-weight: 500;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(23,35,59,0.18); }
+  .hero-note { font-size: 13px; color: var(--ink-soft); }
+
+  /* Signature: transformation panel */
+  .transform {
+    margin-top: 64px;
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    align-items: center;
+    gap: 0;
+  }
+  @media (max-width: 820px) {
+    .transform { grid-template-columns: 1fr; gap: 18px; }
+    .transform .arrow-col { transform: rotate(90deg); margin: 0 auto; }
+  }
+  .raw-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 22px 24px;
+    transform: rotate(-1.1deg);
+    box-shadow: 0 8px 22px rgba(23,35,59,0.06);
+  }
+  .raw-card .tag { font-size: 11px; color: var(--coral-flag); margin-bottom: 12px; }
+  .raw-card .line { height: 8px; background: var(--line); border-radius: 2px; margin-bottom: 9px; opacity: 0.8; }
+  .raw-card .line.w1 { width: 92%; } .raw-card .line.w2 { width: 76%; }
+  .raw-card .line.w3 { width: 85%; } .raw-card .line.w4 { width: 60%; }
+  .raw-card .quote {
+    font-size: 13px; color: var(--ink-soft); margin-top: 14px;
+    border-left: 2px solid var(--line); padding-left: 10px;
+    font-style: italic;
+  }
+  .arrow-col { display: flex; justify-content: center; }
+  .arrow-col svg { width: 34px; height: 34px; color: var(--gold); }
+
+  .final-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--ink);
+    border-radius: 4px;
+    padding: 26px 26px 24px;
+    box-shadow: 0 14px 34px rgba(23,35,59,0.12);
+  }
+  .final-card .tag { font-size: 11px; color: var(--sage); margin-bottom: 10px; }
+  .final-card h3 { font-size: 20px; margin-bottom: 10px; }
+  .final-card .stat-row { display: flex; gap: 18px; margin: 14px 0; }
+  .final-card .stat { }
+  .final-card .stat .num { font-family: 'IBM Plex Mono', monospace; font-size: 22px; color: var(--sage); }
+  .final-card .stat .lbl { font-size: 11px; color: var(--ink-soft); text-transform: uppercase; }
+  .final-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.5; margin: 0; }
+  .final-card .fq { font-size: 13px; font-style: italic; margin-top: 12px; border-left: 2px solid var(--sage); padding-left: 10px; }
+
+  /* Problem section */
+  section { padding: 78px 0; }
+  .section-head { max-width: 620px; margin-bottom: 44px; }
+  .section-head .eyebrow { margin-bottom: 14px; }
+  .section-head h2 { font-size: clamp(28px, 3.4vw, 38px); }
+  .section-head p { color: var(--ink-soft); margin-top: 14px; font-size: 16px; line-height: 1.55; }
+
+  .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  @media (max-width: 780px) { .problem-grid { grid-template-columns: 1fr; } }
+  .problem-cell { background: var(--paper); padding: 30px 26px; }
+  .problem-cell .mono.small { font-size: 11px; color: var(--coral-flag); margin-bottom: 14px; display: block; }
+  .problem-cell h3 { font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+  .problem-cell p { font-size: 14px; color: var(--ink-soft); line-height: 1.55; margin: 0; }
+
+  /* How it works — real sequence, numbering justified */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 10px; }
+  @media (max-width: 780px) { .steps { grid-template-columns: 1fr; } }
+  .step .num { font-family: 'IBM Plex Mono', monospace; color: var(--gold); font-size: 13px; margin-bottom: 12px; }
+  .step h3 { font-size: 19px; margin-bottom: 8px; font-weight: 500; }
+  .step p { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+
+  /* Waitlist */
+  .waitlist {
+    background: var(--ink);
+    color: var(--paper-raised);
+    border-radius: 6px;
+    padding: 56px 48px;
+    margin: 0 auto;
+  }
+  @media (max-width: 700px) { .waitlist { padding: 40px 26px; } }
+  .waitlist-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+  @media (max-width: 860px) { .waitlist-grid { grid-template-columns: 1fr; } }
+  .waitlist h2 { font-size: clamp(26px, 3vw, 34px); color: var(--paper-raised); }
+  .waitlist p.sub { color: #C7CBD6; font-size: 15px; margin-top: 14px; line-height: 1.6; max-width: 440px; }
+
+  .form-card {
+    background: var(--paper-raised);
+    color: var(--ink);
+    border-radius: 5px;
+    padding: 26px;
+  }
+  .form-card .mono.small { font-size: 11px; color: var(--sage); margin-bottom: 6px; display: block; }
+  .form-card label { font-size: 13px; color: var(--ink-soft); display: block; margin: 14px 0 6px; }
+  .form-card input[type=email], .form-card input[type=text] {
+    width: 100%; padding: 11px 12px; border: 1px solid var(--line); border-radius: 3px;
+    font-family: 'Inter', sans-serif; font-size: 14px; background: var(--paper);
+  }
+  .form-card input:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+  .option-row { display: flex; gap: 10px; margin-top: 14px; }
+  .option {
+    flex: 1; border: 1px solid var(--line); border-radius: 3px; padding: 12px;
+    font-size: 13px; cursor: pointer; text-align: center; transition: all 0.15s ease;
+  }
+  .option input { display: none; }
+  .option.checked { border-color: var(--gold); background: var(--gold-soft); }
+  .form-card button {
+    width: 100%; margin-top: 18px; background: var(--ink); color: var(--paper-raised);
+    border: none; padding: 13px; border-radius: 3px; font-size: 14px; font-weight: 500; cursor: pointer;
+  }
+  .form-card button:hover { background: #0f1830; }
+  .form-note { font-size: 12px; color: var(--ink-soft); margin-top: 10px; }
+
+  /* FAQ */
+  .faq-item { border-top: 1px solid var(--line); padding: 22px 0; }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-item h3 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
+  .faq-item p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; margin: 0; max-width: 640px; }
+
+  footer {
+    padding: 40px 0 60px;
+    border-top: 1px solid var(--line);
+    margin-top: 20px;
+  }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+  footer .fine { font-size: 13px; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mark">CS</span>Casewell</div>
+    <div class="navlinks">
+      <a href="#problem">Why</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="https://tally.so/r/7ROW9Z" target="_blank" class="navcta">Get early access</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow mono">FOR AGENCIES & CONSULTANTS</div>
+    <h1>Your best client story is sitting in a <em>call recording</em> nobody transcribed.</h1>
+    <p class="lede">Paste in your client interview notes. Get a publish-ready case study back in under ten minutes — headline, results, pull quotes, formatted and ready to put on your site.</p>
+    <div class="hero-cta-row">
+      <a href="https://tally.so/r/7ROW9Z" target="_blank" class="btn-primary">Get early access →</a>
+      <span class="hero-note">Free for your first case study. No credit card.</span>
+    </div>
+
+    <div class="transform">
+      <div class="raw-card">
+        <div class="tag mono">RAW INTERVIEW NOTES</div>
+        <div class="line w1"></div>
+        <div class="line w2"></div>
+        <div class="line w3"></div>
+        <div class="line w4"></div>
+        <div class="quote">"...honestly we were losing about 15 hours a week just on manual reporting before..."</div>
+      </div>
+      <div class="arrow-col">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+      <div class="final-card">
+        <div class="tag mono">PUBLISHED CASE STUDY</div>
+        <h3>How Northline cut reporting time by 80%</h3>
+        <div class="stat-row">
+          <div class="stat"><div class="num">80%</div><div class="lbl">Time saved</div></div>
+          <div class="stat"><div class="num">15h</div><div class="lbl">Per week reclaimed</div></div>
+        </div>
+        <p>Northline's ops team was spending most of Monday on manual reports before switching to an automated workflow.</p>
+        <div class="fq">"It gave us our Mondays back." — Ops Lead, Northline</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow mono">THE PROBLEM</div>
+      <h2>You know case studies sell. That's why the doc is still open in a tab.</h2>
+      <p>Half-written case studies are one of the most common open tabs in an agency owner's browser. Not because the work wasn't good — because turning a messy conversation into something a prospect will actually read takes hours you don't have.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-cell">
+        <span class="mono small">01 — TIME</span>
+        <h3>Three hours per case study, minimum</h3>
+        <p>Transcribing the call, finding the narrative, writing it up, formatting it — by the time it's done, you've moved on to the next client.</p>
+      </div>
+      <div class="problem-cell">
+        <span class="mono small">02 — CONSISTENCY</span>
+        <h3>Every case study reads differently</h3>
+        <p>Whoever had time that week wrote it. Structure, tone, and quality swing wildly across your site.</p>
+      </div>
+      <div class="problem-cell">
+        <span class="mono small">03 — BACKLOG</span>
+        <h3>Good stories, never told</h3>
+        <p>You've got a dozen happy clients and results worth bragging about. Most of them will never make it onto your site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow mono">HOW IT WORKS</div>
+      <h2>Three steps, ten minutes, one case study.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="num mono">01</div>
+        <h3>Answer 8 questions</h3>
+        <p>About the client's problem, what you did, and the results. Paste in notes from the call if you already have them.</p>
+      </div>
+      <div class="step">
+        <div class="num mono">02</div>
+        <h3>Get a structured draft</h3>
+        <p>Headline, summary, problem, solution, results, and a pull quote — written and formatted, ready to edit.</p>
+      </div>
+      <div class="step">
+        <div class="num mono">03</div>
+        <h3>Export or publish</h3>
+        <p>Download as PDF, copy as Markdown, or publish to a hosted page you can link straight from your site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="waitlist">
+  <div class="wrap">
+    <div class="waitlist">
+      <div class="waitlist-grid">
+        <div>
+          <div class="eyebrow mono" style="color:#D9C88A">EARLY ACCESS</div>
+          <h2>We're opening this up to the first 50 agencies.</h2>
+          <p class="sub">Tell us a bit about how you handle case studies today. Early access members get free Pro access for their first 3 months and shape what gets built.</p>
+        </div>
+        <div class="form-card" style="padding:10px;">
+          <iframe
+            src="https://tally.so/embed/7ROW9Z?hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy"
+            width="100%"
+            height="420"
+            frameborder="0"
+            title="Casewell early access form">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow mono">QUESTIONS</div>
+      <h2>Before you ask</h2>
+    </div>
+    <div class="faq-item">
+      <h3>Do I still need to interview my client?</h3>
+      <p>Yes — for now. You (or whoever manages the account) answers the questions based on the conversation you already had. A client-facing version where they answer directly is on the roadmap.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Will it make up results that aren't true?</h3>
+      <p>No. It only works with the numbers and details you give it — it won't invent metrics. You review and edit everything before it goes anywhere.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What will it cost?</h3>
+      <p>Free for your first case study. Paid plans start around $29/month for unlimited case studies, PDF export, and your own branding — pricing may shift slightly based on early access feedback.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fine">© 2026 Casewell. A tool for agencies who'd rather work than write.</div>
+    <div class="fine">hello@casewell.example</div>
+  </div>
+</footer>
+
+</body>
+</html>
